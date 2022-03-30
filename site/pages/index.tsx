@@ -20,9 +20,21 @@ export async function getStaticProps({
   })
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
+
+  const homeContentPromise = fetch(
+    'https://cdn.contentstack.io/v3/content_types/home_page/entries/blt7820e1b96f79f446?environment=sandbox',
+    {
+      headers: {
+        'access_token': 'cs7c1af859a4c5c0980dab38a2',
+        'api_key': 'bltec2ac4c93c4f03e8'
+      }
+    }
+  ).then(response => response.json())
+
   const { products } = await productsPromise
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
+  const { entry: homeContent } = await homeContentPromise; 
 
   return {
     props: {
@@ -30,17 +42,19 @@ export async function getStaticProps({
       categories,
       brands,
       pages,
+      homeContent,
     },
-    revalidate: 60,
+    revalidate: 120,
   }
 }
 
 export default function Home({
   products,
+  homeContent
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Grid variant="filled">
+      {/* <Grid variant="filled">
         {products.slice(0, 3).map((product: any, i: number) => (
           <ProductCard
             key={product.id}
@@ -57,10 +71,10 @@ export default function Home({
         {products.slice(0, 3).map((product: any, i: number) => (
           <ProductCard key={product.id} product={product} variant="slim" />
         ))}
-      </Marquee>
+      </Marquee> */}
       <Hero
-        headline=" Dessert dragée halvah croissant."
-        description="Cupcake ipsum dolor sit amet lemon drops pastry cotton candy. Sweet carrot cake macaroon bonbon croissant fruitcake jujubes macaroon oat cake. Soufflé bonbon caramels jelly beans. Tiramisu sweet roll cheesecake pie carrot cake. "
+        headline={homeContent.hero_headline}
+        description={homeContent.hero_description}
       />
       <Grid layout="B" variant="filled">
         {products.slice(0, 3).map((product: any, i: number) => (
