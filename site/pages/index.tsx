@@ -25,8 +25,8 @@ export async function getStaticProps({
     'https://cdn.contentstack.io/v3/content_types/home_page/entries/blt7820e1b96f79f446?environment=sandbox',
     {
       headers: {
-        'access_token': 'cs7c1af859a4c5c0980dab38a2',
-        'api_key': 'bltec2ac4c93c4f03e8'
+        'access_token': process.env.CONTENTSTACK_ACCESS_TOKEN,
+        'api_key': process.env.CONTENTSTACK_API_KEY,
       }
     }
   ).then(response => response.json())
@@ -44,7 +44,7 @@ export async function getStaticProps({
       pages,
       homeContent,
     },
-    revalidate: 120,
+    revalidate: 3600,
   }
 }
 
