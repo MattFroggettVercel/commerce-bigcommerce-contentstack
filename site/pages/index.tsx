@@ -25,8 +25,8 @@ export async function getStaticProps({
     'https://cdn.contentstack.io/v3/content_types/home_page/entries/blt7820e1b96f79f446?environment=sandbox',
     {
       headers: {
-        'access_token': process.env.CONTENTSTACK_ACCESS_TOKEN,
-        'api_key': process.env.CONTENTSTACK_API_KEY,
+        'access_token': process.env.CONTENTSTACK_ACCESS_TOKEN || '',
+        'api_key': process.env.CONTENTSTACK_API_KEY || '',
       }
     }
   ).then(response => response.json())
