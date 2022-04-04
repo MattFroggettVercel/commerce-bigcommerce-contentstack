@@ -37,7 +37,7 @@ export async function getStaticProps({
 
   const page = data?.page
 
-  if (!page) {
+  if (!page || !page.body) {
     return {
       notFound: true,
     }
