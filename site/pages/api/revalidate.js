@@ -5,8 +5,10 @@ export default async function handler(req, res) {
   }
   
   try {
-    await res.unstable_revalidate('/')
-    return res.json({ revalidated: true })
+    setTimeout(() => {
+      await res.unstable_revalidate('/')
+      return res.json({ revalidated: true })
+    }, 5000)
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
