@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   }
   
   try {
-    setTimeout(() => {
+    setTimeout(async () => {
       await res.unstable_revalidate('/')
       return res.json({ revalidated: true })
     }, 5000)
