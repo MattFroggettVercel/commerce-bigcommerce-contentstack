@@ -4,7 +4,7 @@ import s from './UserNav.module.css'
 import { Avatar } from '@components/common'
 import useCart from '@framework/cart/use-cart'
 import { useUI } from '@components/ui/context'
-import { Heart, Bag, Menu } from '@components/icons'
+import { Heart, Bag, Menu, Info } from '@components/icons'
 import CustomerMenuContent from './CustomerMenuContent'
 import useCustomer from '@framework/customer/use-customer'
 import React from 'react'
@@ -13,6 +13,7 @@ import {
   DropdownTrigger as DropdownTriggerInst,
   Button,
 } from '@components/ui'
+import { toggle } from 'lib/redis'
 
 import type { LineItem } from '@commerce/types/cart'
 
@@ -31,6 +32,12 @@ const UserNav: React.FC<{
     openSidebar,
   } = useUI()
 
+  const toggleClosedFeatureFlag = async () => {
+    const toggled = await fetch(`/api/toggleClosed`)
+
+    location.reload()
+  }
+
   const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
   const DropdownTrigger = isCustomerLoggedIn
     ? DropdownTriggerInst
@@ -39,6 +46,11 @@ const UserNav: React.FC<{
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
+        <li className={s.item}>
+          <a onClick={toggleClosedFeatureFlag}>
+            <Info />
+          </a>
+        </li>
         {process.env.COMMERCE_CART_ENABLED && (
           <li className={s.item}>
             <Button
