@@ -1,4 +1,4 @@
-export async function get(key) {
+export async function get(key: string) {
   const req = await fetch(
     `https://global-fitting-warthog-32489.upstash.io/get/${key}`,
     {
