@@ -1,0 +1,37 @@
+[
+  {
+    "name": "PDP Test",
+    "id": "INULeuOWQFG-Z0pwy3I8Yg",
+    "variants": {
+      "A": [
+        {
+          "name": "original",
+          "id": 0,
+          "weight": 33.3333
+        },
+        {
+          "name": "Buy Now",
+          "id": 1,
+          "weight": 33.3333
+        },
+        {
+          "name": "Add To Bag",
+          "id": 2,
+          "weight": 33.3333
+        }
+      ],
+      "B": [
+        {
+          "name": "original",
+          "id": 0,
+          "weight": 50
+        },
+        {
+          "name": "Left",
+          "id": 1,
+          "weight": 50
+        }
+      ]
+    }
+  }
+]
