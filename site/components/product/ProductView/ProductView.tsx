@@ -11,21 +11,37 @@ import { SEO } from '@components/common'
 import ProductSidebar from '../ProductSidebar'
 import ProductTag from '../ProductTag'
 interface ProductViewProps {
+  params: any,
   product: Product
   relatedProducts: Product[]
 }
 
-const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
+const ProductView: FC<ProductViewProps> = ({ params, product, relatedProducts }) => {
   const { price } = usePrice({
     amount: product.price.value,
     baseAmount: product.price.retailPrice,
     currencyCode: product.price.currencyCode!,
   })
 
+  const ctaVariant = params.sectionAVariant
+  const sidebarVariant = params.sectionBVariant
+
+  let buyCta = 'Add to Cart'
+  if (ctaVariant == 1) buyCta = 'Buy Now'
+  if (ctaVariant == 2) buyCta = 'Add To Bag'
+
   return (
     <>
       <Container className="max-w-none w-full" clean>
         <div className={cn(s.root, 'fit')}>
+          { sidebarVariant == 1 ? (
+            <ProductSidebar
+              key={product.id}
+              product={product}
+              className={s.sidebar}
+              buyCta={buyCta}
+            />
+          ) : null}
           <div className={cn(s.main, 'fit')}>
             <ProductTag
               name={product.name}
@@ -58,11 +74,14 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
             )}
           </div>
 
-          <ProductSidebar
-            key={product.id}
-            product={product}
-            className={s.sidebar}
-          />
+          { sidebarVariant == 0 ? (
+            <ProductSidebar
+              key={product.id}
+              product={product}
+              className={s.sidebar}
+              buyCta={buyCta}
+            />
+          ) : null}
         </div>
         <hr className="mt-7 border-accent-2" />
         <section className="py-12 px-6 mb-10">

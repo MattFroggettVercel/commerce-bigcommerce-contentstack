@@ -1,10 +1,12 @@
 import cn from 'clsx'
 import Link from 'next/link'
 import s from './UserNav.module.css'
+import Cookies from 'js-cookie'
+import { COOKIE_NAME } from '@lib/constants'
 import { Avatar } from '@components/common'
 import useCart from '@framework/cart/use-cart'
 import { useUI } from '@components/ui/context'
-import { Heart, Bag, Menu, Info } from '@components/icons'
+import { Heart, Bag, Menu, Info, Trash } from '@components/icons'
 import CustomerMenuContent from './CustomerMenuContent'
 import useCustomer from '@framework/customer/use-customer'
 import React from 'react'
@@ -38,6 +40,11 @@ const UserNav: React.FC<{
     location.reload()
   }
 
+  const resetMvt = () => {
+    Cookies.remove(COOKIE_NAME)
+    window.location.reload()
+  }
+
   const itemsCount = data?.lineItems.reduce(countItem, 0) ?? 0
   const DropdownTrigger = isCustomerLoggedIn
     ? DropdownTriggerInst
@@ -46,6 +53,11 @@ const UserNav: React.FC<{
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
+        <li className={s.item}>
+          <a onClick={resetMvt}>
+            <Trash />
+          </a>
+        </li>
         <li className={s.item}>
           <a onClick={toggleClosedFeatureFlag}>
             <Info />
