@@ -31,7 +31,7 @@ export function middleware(req) {
   const experimentParts = cookie.split('|')
   experimentParts.shift()
 
-  url.pathname = url.pathname.replace('/product/', `/product/_/${experimentParts[0]}/${experimentParts[1]}/`)
+  url.pathname = url.pathname.replace('/product/', `/product/_/${experimentParts[0]}/${experimentParts[1]}/${experimentParts[2]}/`)
 
   res = NextResponse.rewrite(url)
 

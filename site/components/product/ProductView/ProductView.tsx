@@ -25,10 +25,14 @@ const ProductView: FC<ProductViewProps> = ({ params, product, relatedProducts })
 
   const ctaVariant = params.sectionAVariant
   const sidebarVariant = params.sectionBVariant
+  const ctaStyleVariant = params.sectionCVariant
 
   let buyCta = 'Add to Cart'
   if (ctaVariant == 1) buyCta = 'Buy Now'
   if (ctaVariant == 2) buyCta = 'Add To Bag'
+
+  let ctaStyle: 'flat' | 'ghost' = 'flat'
+  if (ctaStyleVariant == 1) ctaStyle = 'ghost'
 
   return (
     <>
@@ -40,6 +44,7 @@ const ProductView: FC<ProductViewProps> = ({ params, product, relatedProducts })
               product={product}
               className={s.sidebar}
               buyCta={buyCta}
+              ctaStyle={ctaStyle}
             />
           ) : null}
           <div className={cn(s.main, 'fit')}>
@@ -80,6 +85,7 @@ const ProductView: FC<ProductViewProps> = ({ params, product, relatedProducts })
               product={product}
               className={s.sidebar}
               buyCta={buyCta}
+              ctaStyle={ctaStyle}
             />
           ) : null}
         </div>

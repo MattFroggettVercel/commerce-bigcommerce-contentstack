@@ -1,7 +1,7 @@
 [
   {
     "name": "PDP Test",
-    "id": "INULeuOWQFG-Z0pwy3I8Yg",
+    "id": "a_HlBBUBQ0C_eoIKvAG1Uw",
     "variants": {
       "A": [
         {
@@ -28,6 +28,18 @@
         },
         {
           "name": "Left",
+          "id": 1,
+          "weight": 50
+        }
+      ],
+      "C": [
+        {
+          "name": "original",
+          "id": 0,
+          "weight": 50
+        },
+        {
+          "name": "Ghost",
           "id": 1,
           "weight": 50
         }

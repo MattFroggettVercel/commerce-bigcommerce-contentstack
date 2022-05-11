@@ -14,9 +14,10 @@ interface ProductSidebarProps {
   product: Product
   className?: string
   buyCta: string
+  ctaStyle: 'flat' | 'ghost'
 }
 
-const ProductSidebar: FC<ProductSidebarProps> = ({ product, className, buyCta }) => {
+const ProductSidebar: FC<ProductSidebarProps> = ({ product, className, buyCta, ctaStyle }) => {
   const addItem = useAddItem()
   const { openSidebar } = useUI()
   const [loading, setLoading] = useState(false)
@@ -61,6 +62,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className, buyCta })
           <Button
             aria-label={buyCta}
             type="button"
+            variant={ctaStyle}
             className={s.button}
             onClick={addToCart}
             loading={loading}
