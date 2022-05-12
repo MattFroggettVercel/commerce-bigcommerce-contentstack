@@ -5,6 +5,11 @@ import { getCurrentExperiment } from '@lib/optimize'
 export function middleware(req) {
   let res = NextResponse.next()
   let cookie = req.cookies[COOKIE_NAME]
+  const url = req.nextUrl.clone()
+
+  if (String(url.pathname).includes('_')) {
+    return;
+  }
 
   if (!cookie) {
     const experiment = getCurrentExperiment()
@@ -27,7 +32,6 @@ export function middleware(req) {
     }
   }
 
-  const url = req.nextUrl.clone()
   const experimentParts = cookie.split('|')
   experimentParts.shift()
 
